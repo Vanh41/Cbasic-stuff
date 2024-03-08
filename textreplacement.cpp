@@ -4,8 +4,9 @@
 #include<ctype.h>
 
 int check(int i,int j,char p1[],char text[]){
+    int count=0;
     for (int x=i;x<=j;x++){
-       if (text[x]!=p1[x]) return 0;
+       if (text[x]!=p1[count++]) return 0;
     }
     return 1;
 }
@@ -25,8 +26,8 @@ int main(){
    for (int i=0;i<strlen(text);i++)
     for (int j=i;j<strlen(text);j++)
      if (check(i,j,p1,text)==1) {
-         for (int k=i;k<=j;k++) text[k]=p2[k];
+        strncpy(text+i,p2,strlen(p2));
      }
-   printf("%s\n%s\n%s",p1,p2,text);
+   printf("%s",text);
    return 0;
 }
