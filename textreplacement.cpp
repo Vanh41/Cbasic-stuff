@@ -3,15 +3,18 @@
 #include<string.h>
 #include<ctype.h>
 
-int check(int i,int j,char p1[],char text[]){
-    char temp[2000];
-    int count=0;
-    for (int x=i;x<=j;x++) temp[count++]=text[x];
-    temp[count]='\0';
-    if (strcmp(temp,p1)!=0) return 0;
-    return 1;
-}
+char ans[2000];
 
+void replaceString(const char *find, const char *replace,char *text) {
+    char *pos = strstr(text, find);
+    while (pos != NULL) {
+        int lenFind = strlen(find);
+        int lenReplace = strlen(replace);
+        memmove(pos + lenReplace, pos + lenFind, strlen(pos + lenFind) + 1);
+        memcpy(pos, replace, lenReplace);
+        pos = strstr(pos + lenReplace, find);
+    }
+}
 
 
 int main(){
@@ -24,12 +27,7 @@ int main(){
    getchar();
    fflush(stdin);
    fgets(text,2000,stdin);
-   for (int i=0;i<strlen(text);i++)
-    for (int j=i;j<strlen(text);j++)
-     if (check(i,j,p1,text)==1) {
-        strncpy(text+i,"",strlen(p1)); 
-        strncpy(text+i,p2,strlen(p2));
-     }
+   replaceString(p1,p2,text);
    printf("%s",text);
    return 0;
 }
