@@ -17,9 +17,9 @@ int main(){
    char p1[2000];
    char p2[2000];
    char text[2000];
-   fflush(stdin);
-   scanf("%s",p1);
-   scanf("%s",p2);
+   scanf("%[^\n]s",p1);
+   getchar();
+   scanf("%[^\n]s",p2);
    getchar();
    fflush(stdin);
    fgets(text,1000,stdin);
