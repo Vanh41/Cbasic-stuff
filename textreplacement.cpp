@@ -4,10 +4,11 @@
 #include<ctype.h>
 
 int check(int i,int j,char p1[],char text[]){
+    char temp[2000];
     int count=0;
-    for (int x=i;x<=j;x++){
-       if (text[x]!=p1[count++]) return 0;
-    }
+    for (int x=i;x<=j;x++) temp[count++]=text[x];
+    temp[count]='\0';
+    if (strcmp(temp,p1)!=0) return 0;
     return 1;
 }
 
