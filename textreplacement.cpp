@@ -26,6 +26,7 @@ int main(){
    for (int i=0;i<strlen(text);i++)
     for (int j=i;j<strlen(text);j++)
      if (check(i,j,p1,text)==1) {
+        strncpy(text+i,"",strlen(p1)); 
         strncpy(text+i,p2,strlen(p2));
      }
    printf("%s",text);
