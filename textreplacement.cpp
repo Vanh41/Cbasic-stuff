@@ -22,7 +22,7 @@ int main(){
    scanf("%[^\n]s",p2);
    getchar();
    fflush(stdin);
-   fgets(text,1000,stdin);
+   fgets(text,2000,stdin);
    for (int i=0;i<strlen(text);i++)
     for (int j=i;j<strlen(text);j++)
      if (check(i,j,p1,text)==1) {
