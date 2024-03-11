@@ -20,10 +20,24 @@ int computemul(char a[],int n){
 	for (int i=n;i<strlen(a);i++){
 		if (a[i]='*') continue;
 	  ans=ans*(a[i]-'0');
-	  i++
-	  if (a[i]=='+') break;
-	  pos=i;
+	  i++;
+	  if (a[i]=='+') {
+	  	pos=i;
+	  break;
+}
 	}
+	return ans;
+}
+int computesum(char a[],int n){
+	int ans=a[n-1]-'0';
+	for (int i=n;i<strlen(a);i++){
+		 if (a[i+1]=='*') {
+	  	pos=i;
+	  	break;
+	}
+		if (a[i]='+') continue;
+	  ans=ans+(a[i]-'0');
+	  i++;
 	return ans;
 }
 
@@ -35,9 +49,16 @@ int compute(char a[]){
 	while(a[i]!='\0'){
 		if (a[i]=='*'){
 			ans=ans+computemul(a,i);
-			i=i+pos;
+			i=pos;
 		}
+		if (a[i]=='+')
+		 {
+		 	ans=ans+computesum(a,i)
+		 	i=pos;
+		 }
+		 i++
 	}
+	return ans;
 }
 
 int main(){
@@ -45,4 +66,6 @@ int main(){
 	int i=0;
 	scanf("%s",a);
 	printf("%d",check(a));
+	if (check(a)==0) printf("NOT_CORRECT");
+	else printf("%d",compute(a));
 }
