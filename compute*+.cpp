@@ -3,7 +3,7 @@
 #include<string.h>
 #include<ctype.h>
 #include <math.h>
-//NOT FINISHED
+//NOT FINISHED 
 int pos=0;
 int check(char a[]){
 	int i=1;
