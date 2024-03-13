@@ -25,7 +25,8 @@ int compute(char a[]){
 	int count=0;
 	int tmp[15000];
 	int sum=0;
-	for (int i=0;i<100;i++) tmp[i]=1;
+	for (int i=0;i<15000;i++) tmp[i]=1;
+	for (int i=0;i<15000;i++) num[i]=0;
 	while(a[i]!='\0'){
 		if (isdigit(a[i])>0){
 		val=val*10+a[i]-'0';
