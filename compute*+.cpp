@@ -17,45 +17,60 @@ int check(char a[]){
 	return 1;
 }
 
+
 int compute(char a[]){
 	int i=0;
-	int num[15000];
-	int ans=0;
+	int num[100000];
 	int val=0;
 	int count=0;
-	int tmp[15000];
-	int sum=0;
-	for (int i=0;i<15000;i++) tmp[i]=1;
-	for (int i=0;i<15000;i++) num[i]=0;
+    long long tmp[100000];
+	unsigned long long sum=0;
+	int digit[100000];
+	int pos=0;
+	for (int i=0;i<100000;i++) tmp[i]=1;
+	for (int i=0;i<100000;i++) num[i]=0;
 	while(a[i]!='\0'){
 		if (isdigit(a[i])>0){
 		val=val*10+a[i]-'0';
 		i++;
+		pos++;
 	}
 	   else {
-	   	num[i-1]=val;
+	   	num[i-pos]=val;
+	   	digit[val]=pos;
+	   	pos=0;
         val=0;
 	   	i++;
+	   	
 	   }
-	   if (a[i]=='\0') num[i-1]=val;	
+	   if (a[i]=='\0') {
+	   num[i-pos]=val;
+	   digit[val]=pos;
+     }	   	
 	}
    i=0;
+   int x=0;
    while (a[i]!='\0'){
+   	if (isdigit(a[i])>0&&x==0) {
+	   pos=i;
+	   x=1;
+}
+else if (isdigit(a[i])==0&&x==1) x=0;
    	if (a[i]=='*'){
-   		tmp[count]=tmp[count]*num[i-1];
-   		num[i-1]=0;
+   		tmp[count]=tmp[count]*num[i-digit[num[pos]]];
+   		num[i-digit[num[pos]]]=0;
    		i++;
 	   }
-	   else if (a[i]=='+'&&a[i-2]=='*'){
-	   	tmp[count]=tmp[count]*num[i-1];
-	   	num[i-1]=0;
+	   else if (a[i]=='+'&&a[i-digit[num[pos]]-1]=='*'){
+	   	tmp[count]=tmp[count]*num[i-digit[num[pos]]];
+	   	num[i-digit[num[pos]]]=0;
 	   	count++;
 	   	i++;
 	   }
 	   else i++;
-	  if (a[i]=='\0'&&a[i-2]=='*') {
-	   	tmp[count]=tmp[count]*num[i-1];
-	   	num[i-1]=0;
+	  if (a[i]=='\0'&&a[i-digit[num[pos]]-1]=='*') {
+	   	tmp[count]=tmp[count]*num[i-digit[num[pos]]];
+	   	num[i-digit[num[pos]]]=0;
 	   	count++;
 	   }
    }
@@ -68,10 +83,10 @@ int compute(char a[]){
 }
 
 int main(){
-	char a[15000];
+	char a[100000];
 	int i=0;
 	scanf("%s",a);
 	if (check(a)==0) printf("NOT_CORRECT");
 	else
-	printf("%d",compute(a));
+	printf("%lld",compute(a));
 }
