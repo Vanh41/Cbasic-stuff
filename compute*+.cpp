@@ -3,7 +3,7 @@
 #include<string.h>
 #include<ctype.h>
 #include <math.h>
-
+///
 
 int check(char a[]){
 	int i=1;
