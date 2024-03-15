@@ -3,7 +3,7 @@
 #include<string.h>
 #include<ctype.h>
 #include <math.h>
-//
+
 
 int check(char a[]){
 	int i=1;
@@ -18,14 +18,14 @@ int check(char a[]){
 }
 
 
-int compute(char a[]){
+long long compute(char a[]){
 	int i=0;
 	int num[100000];
 	int val=0;
 	int count=0;
-    long long tmp[100000];
+    unsigned long long tmp[100000];
 	unsigned long long sum=0;
-	int digit[100000];
+	int digit[190000];
 	int pos=0;
 	for (int i=0;i<100000;i++) tmp[i]=1;
 	for (int i=0;i<100000;i++) num[i]=0;
@@ -88,5 +88,5 @@ int main(){
 	scanf("%s",a);
 	if (check(a)==0) printf("NOT_CORRECT");
 	else
-	printf("%lld",compute(a));
+	printf("%lld",compute(a)%(1000000000+7));
 }
