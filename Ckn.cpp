@@ -3,7 +3,7 @@
 #include <string.h>
 #include <stdlib.h>
 
-int D[1000][1000]; 
+int D[10000][01000]; 
 int C(int n,int k){
     if ((k==0||k==n)) D[n][k]=1;
     else 
