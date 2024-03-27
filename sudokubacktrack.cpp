@@ -1,4 +1,4 @@
-
+#include<stdbool.h>
 #include<stdio.h>
 #include<stdlib.h>
 #include<string.h>
@@ -7,7 +7,6 @@
 #define N 9
 
 int grid[N][N];
-bool get_RC(int &row, int &col);
 
 int check(int i,int j,int k){
    for (int x=0;x<9;x++)
@@ -68,4 +67,3 @@ int main()
 	int ans = count_Solution(0);
     printf("%d",ans);
 }
-
