@@ -77,7 +77,7 @@ void backtrack(int **grid,int x){
      		if (count_1(grid)==n) {
 			 count++;
 			}
-     		backtrack(grid,i);
+     		backtrack(grid,i+1);
      		grid[i][j]=0;
      		temp--;
 		 }
