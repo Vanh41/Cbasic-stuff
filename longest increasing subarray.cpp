@@ -8,7 +8,7 @@
 #include <stdbool.h>
 
 
-// input : 1 2 6 4 -6 8 9 
+// input : 1 2 6 -3 -6 8 9 
 // output : length
            // 1 2 6 8 9
 
