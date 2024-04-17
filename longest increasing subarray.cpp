@@ -7,6 +7,11 @@
 #include <math.h>
 #include <stdbool.h>
 
+
+// input : 1 2 6 4 -6 8 9 
+// output : length
+           // 1 2 6 8 9
+
 int a[100000]={0};
 bool comp[100000]={0};
 int Length[100000]={0};
