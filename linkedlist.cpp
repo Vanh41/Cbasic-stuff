@@ -27,17 +27,18 @@ void displayNode(node*p){
         return ;
     }
     contact tmp=p->el;
-    printf("%-20s\t%-15s\t%-25s%-p\n",tmp.name,tmp.tel,tmp.email,p->next);
+    printf("\t%-15s\t%-15s\t%-15s%-p\n",tmp.name,tmp.tel,tmp.email,p->next);
 }
 
 contact readnode(){
     contact tmp;
     printf("Input full name: ");
-    fgets(tmp.name,sizeof(tmp.name),stdin);
+    fgets(tmp.name,20,stdin);
     printf("Input Tel: ");
-    fgets(tmp.tel,sizeof(tmp.tel),stdin);
+    fgets(tmp.tel,11,stdin);
     printf("Input Email: ");
-    fgets(tmp.email,sizeof(tmp.email),stdin);
+    fgets(tmp.email,25,stdin);
+    return tmp;
 }
 
 void insertAthead(contact ct){
@@ -51,7 +52,7 @@ void main(){
     int i;contact tmp;
     for (int i=0;i<2;i++){
         tmp=readnode();
-        insertAthead(tmp);
+        root=makenewnode(tmp);
         displayNode(root);
     }
 }
