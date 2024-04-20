@@ -1,79 +1,94 @@
 #include <stdio.h>
 #include <stdlib.h>
-
-typedef struct contact_t
-{
-        char name[20];
-        char tel[11];
-        char email[25];
-}contact;
-struct list_el{
-       contact el;
-       struct list_el *next;
+#include <string.h>
+struct list{
+    int element;
+    struct list *next;
 };
-typedef struct list_el node ;
+typedef struct list node;
+node *root,*cur,*prev;
 
-node *root,*cur;
-node *prev;
-node *makenewnode(contact ct){
+node *makenewnode(int k){
     node *new = (node*)malloc(sizeof(node));
-    new->el=ct;
+    new->element=k;
     new->next=NULL;
     return new;
 }
-void displayNode(node*p){
-    if (p==NULL) {
-        printf("NULL pointer error.\n");
-        return ;
-    }
-    contact tmp=p->el;
-    printf("\t%-15s\t%-15s\t%-15s%-p\n",tmp.name,tmp.tel,tmp.email,p->next);
-}
 
-contact readnode(){
-    contact tmp;
-    printf("Input full name: ");
-    fgets(tmp.name,20,stdin);
-    printf("Input Tel: ");
-    fgets(tmp.tel,11,stdin);
-    printf("Input Email: ");
-    fgets(tmp.email,25,stdin);
-    return tmp;
-}
-
-void insertAthead(contact ct){
-    node *new=makenewnode(ct);
+void addfirst(int k){
+    node *new=makenewnode(k);
     new->next=root;
     root=new;
     cur=root;
 }
-void insertaftercur (contact ct){
-    node *new=makenewnode(ct);
-    if (root==NULL) {
+
+void addlast(int k){
+    node *new=makenewnode(k);
+    if (root==NULL){
         root=new;
-        cur=root;
+        cur=new;
+        prev=NULL;
+        return;
     }
-    else if (cur==NULL) return;
-    else {
-    new->next=cur->next;
-    cur->next=new;
-    cur=cur->next;
-    }
-}
-void deletefirstelement(){
-    node* del=root;
-    if (del==NULL) return;
-    root=del->next;
-    free(del);
-    cur=root;
-    prev=NULL;
+    node *p=root;
+    while (p->next!=NULL)
+    p=p->next;
+    p->next=new;
+    cur=new;
+    prev=p;
 }
 
+node *reverse (node *root){
+    node *cur,*prev;
+    cur =prev=NULL;
+    while (root!=NULL){
+        cur = root;
+        root=root->next;
+        cur->next=prev;
+        prev=cur;
+    }
+    return prev;
+}
+
+void output(node*p){
+    if (p==NULL) {
+        printf("NULL pointer error.\n");
+        return ;
+    }
+    int tmp=p->element;
+    printf("%d",tmp);
+}
+
+int readnode(){
+    int tmp;
+    scanf("%d",&tmp);
+    return tmp;
+}
+
+
 void main(){
-    int i;contact tmp;
-    for (int i=0;i<2;i++){
-        tmp=readnode();
-        root=makenewnode(tmp);
-        displayNode(root);
+    int n; int a;
+    scanf("%d",&n);
+    for (int i=1;i<=n;i++) {
+        a=readnode();
+        root=makenewnode(a);
+    }
+    output(root);
+    char command[1000];
+ 
+    while (strcmp(command,"#")!=0){
+        scanf("%s",command);
+        if (strcmp(command,"#")==0) break;
+        if (strcmp(command,"addlast")==0) {
+            int k;
+            scanf("%d",&k);
+            addlast(k);
+        }
+        if (strcmp(command,"addfirst")==0) {
+            int k;
+            scanf("%d",&k);
+            addfirst(k);
+        }
+        
     }
 }
