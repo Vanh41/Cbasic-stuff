@@ -24,7 +24,7 @@ void addfirst(int k){
 
 void addlast(int k){
     node *new=makenewnode(k);
-    if (root=NULL){
+    if (root==NULL){
         root=new;
         cur=new;
         prev=NULL;
@@ -76,9 +76,17 @@ void main(){
     char command[1000];
     getchar();
     while (strcmp(command,"#")!=0){
-        fgets(command,1000,stdin);
+        scanf("%s",command);
         if (strcmp(command,"#")==0) break;
-        if (strcmp(command,"addlast k")==0) addlast(command[9]-'0');
-        if (strcmp(command,"addfirst k")==0) addfirst(command[10]-'0');
+        if (strcmp(command,"addlast")==0) {
+            int k;
+            scanf("%d",&k);
+            addlast(k);
+        }
+        if (strcmp(command,"addfirst")==0) {
+            int k;
+            scanf("%d",&k);
+            addfirst(k);
+        }
     }
 }
