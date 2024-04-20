@@ -47,6 +47,27 @@ void insertAthead(contact ct){
     root=new;
     cur=root;
 }
+void insertaftercur (contact ct){
+    node *new=makenewnode(ct);
+    if (root==NULL) {
+        root=new;
+        cur=root;
+    }
+    else if (cur==NULL) return;
+    else {
+    new->next=cur->next;
+    cur->next=new;
+    cur=cur->next;
+    }
+}
+void deletefirstelement(){
+    node* del=root;
+    if (del==NULL) return;
+    root=del->next;
+    free(del);
+    cur=root;
+    prev=NULL;
+}
 
 void main(){
     int i;contact tmp;
