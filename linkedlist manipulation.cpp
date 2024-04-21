@@ -123,6 +123,7 @@ bool checkavai(int u,int v){
 
 void addafter(int u,int v){
   node *find;
+  if (check(u)==true&&check(v)==true) return;
   find=temp=prev=head;
   if (checkavai(u,v)==false) return;
   if (find->next==NULL) addlast(u);
@@ -141,9 +142,10 @@ void addafter(int u,int v){
 
 void addbefore(int u,int v){
   node *find;
+  if (check(u)==true&&check(v)==true) return;
   find=temp=prev=head;
   if (checkavai(u,v)==false) return;
-  if (find==head) addfirst(u);
+  if (find==head&&find->element==v) addfirst(u);
   else
   while (find->next!=NULL){
     if (find->element==v){
@@ -185,6 +187,7 @@ int main(){
     addfirst(k);
   }
  }  
+ reverse();
 //  command
 char command[1000];
  
@@ -221,10 +224,10 @@ char command[1000];
             addbefore(u,v);
         }
         
-        if (strcmp(command,"reverser")==0) {
+        if (strcmp(command,"reverse")==0) {
             reverse();
         }
-        printsolution();
+        //printsolution();
     }
-//  printsolution();
+ printsolution();
 }
