@@ -75,6 +75,74 @@ void removed(int k){
   }
 }
 
+bool checkavai(int u,int v){
+  node *find=head;
+  int checku=0;
+  int checkv=0;
+  if (find->element==v&&find->next==NULL) return true;
+  if (find->next==NULL) return false;
+  // check if v appear
+  while (find->next!=NULL){
+    if (find->element==v) {
+      checkv=1;
+      break;
+    }
+    else find=find->next;
+  }
+ find=head;
+  // check if u not appear
+  while (find->next!=NULL){
+    if (find->element==u) {
+      checku=1;
+      break;
+    }
+    else find=find->next;
+  }
+  if (checku==1&&checkv==1) return false;
+  if (checku==0&&checkv==1) return true;
+  return false;
+}
+
+void addafter(int u,int v){
+  node *find;
+  find=temp=prev=head;
+  if (checkavai(u,v)==false) return;
+  if (find->next==NULL) addlast(u);
+  else
+  while (find->next!=NULL){
+    if (find->element==v){
+      temp=makenewnode(u);
+      temp->next=find->next;
+      find->next=temp;
+      find=find->next;
+    }
+    else find=find->next;
+  }
+}
+
+void addbefore(int u,int v){
+  node *find;
+  find=temp=prev=head;
+  if (checkavai(u,v)==false) return;
+  if (find==head) addfirst(u);
+  else
+  while (find->next!=NULL){
+    if (find->element==v){
+      temp=makenewnode(u);
+      temp->next=prev->next;
+      prev->next=temp;
+      find=find->next;
+    }
+    else {
+      if (prev==find) find=find->next;
+      else {
+        prev=prev->next;
+        find=find->next;
+    }
+  }
+  }
+}
+
 
 
 
@@ -116,6 +184,16 @@ char command[1000];
             removed(k);
         }
 
+        if (strcmp(command,"addafter")==0) {
+            int u,v;
+            scanf("%d %d",&u,&v);
+            addafter(u,v);
+        }
+        if (strcmp(command,"addbefore")==0) {
+            int u,v;
+            scanf("%d %d",&u,&v);
+            addbefore(u,v);
+        }
         
     }
  printsolution();
