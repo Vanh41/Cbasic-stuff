@@ -1,36 +1,50 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
+#include<stdio.h>
+#include<stdlib.h>
+#include<string.h>
+#include<ctype.h>
+#include <math.h>
+#include <stdbool.h>
+
 struct list{
-    int element;
-    struct list *next;
+  int element;
+  struct list *next;
 };
 typedef struct list node;
-node *root,*cur,*prev;
+
+node *head,*cur,*temp,*prev;
 
 node *makenewnode(int k){
-    node *new = (node*)malloc(sizeof(node));
-    new->element=k;
-    new->next=NULL;
-    return new;
+  node *new =(node*)malloc(sizeof(node));
+  new->element=k;
+  new->next=NULL;
+  return new;
+}
+
+void printsolution(){
+    node *tmp;
+    tmp=head;
+    while(tmp != NULL){
+        printf("%d ", tmp->element);
+        tmp=tmp->next;
+    }
 }
 
 void addfirst(int k){
     node *new=makenewnode(k);
-    new->next=root;
-    root=new;
-    cur=root;
+    new->next=head;
+    head=new;
+    cur=head;
 }
 
 void addlast(int k){
     node *new=makenewnode(k);
-    if (root==NULL){
-        root=new;
+    if (head==NULL){
+        head=new;
         cur=new;
         prev=NULL;
         return;
     }
-    node *p=root;
+    node *p=head;
     while (p->next!=NULL)
     p=p->next;
     p->next=new;
@@ -38,55 +52,63 @@ void addlast(int k){
     prev=p;
 }
 
-node *reverse (node *root){
-    node *cur,*prev;
-    cur =prev=NULL;
-    while (root!=NULL){
-        cur = root;
-        root=root->next;
-        cur->next=prev;
-        prev=cur;
+void remove(int k){
+  node *find;
+  find=temp=head;
+  if (find->next==NULL) free(find);
+  else
+  while (find->next!=NULL){
+    if (find->element==k){
+      temp=find;
+      find=find->next;
+      free(temp);
     }
-    return prev;
-}
-
-void output(node*p){
-    if (p==NULL) {
-        printf("NULL pointer error.\n");
-        return ;
-    }
-    int tmp=p->element;
-    printf("%d",tmp);
-}
-
-int readnode(){
-    int tmp;
-    scanf("%d",&tmp);
-    return tmp;
+    else find=find->next;
+  }
 }
 
 
-void main(){
-    int n; int a;
-    scanf("%d",&n);
-    for (int i=1;i<=n;i++) {
-        a=readnode();
-        root=makenewnode(a);
-    }
-    char command[1000];
-    getchar();
+
+
+
+int main(){ 
+ int n;
+//  khoi tao
+ scanf("%d",&n);
+ for (int i=0;i<n;i++){
+  int k;
+  scanf("%d",&k);
+  if (head==NULL) temp=head=makenewnode(k);
+  else {
+    addfirst(k);
+  }
+ }  
+//  command
+char command[1000];
+ 
     while (strcmp(command,"#")!=0){
         scanf("%s",command);
         if (strcmp(command,"#")==0) break;
+
         if (strcmp(command,"addlast")==0) {
             int k;
             scanf("%d",&k);
             addlast(k);
         }
+
         if (strcmp(command,"addfirst")==0) {
             int k;
             scanf("%d",&k);
             addfirst(k);
         }
+
+        if (strcmp(command,"remove")==0) {
+            int k;
+            scanf("%d",&k);
+            remove(k);
+        }
+
+        
     }
+ printsolution();
 }
