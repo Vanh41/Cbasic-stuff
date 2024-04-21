@@ -55,6 +55,10 @@ void addlast(int k){
 void removed(int k){
   node *find;
   find=temp=prev=head;
+  if(find->element==k) {
+    head=head->next;
+    return;
+  }
   if (find->next==NULL&&find->element==k) {
     free(find);
     head=NULL;
@@ -72,6 +76,10 @@ void removed(int k){
         find=find->next;
       }
     }
+  }
+  if (find->element==k) {
+    free(find);
+    prev->next=NULL;
   }
 }
 
@@ -143,9 +151,16 @@ void addbefore(int u,int v){
   }
 }
 
-
-
-
+void reverse(){
+  temp=prev=NULL;
+  while (head!=NULL){
+    temp=head;
+    head=head->next;
+    temp->next=prev;
+    prev=temp;
+  }
+  head=temp;
+}
 
 int main(){ 
  int n;
@@ -195,6 +210,10 @@ char command[1000];
             addbefore(u,v);
         }
         
+        if (strcmp(command,"reverser")==0) {
+            reverse();
+        }
+        printsolution();
     }
- printsolution();
+//  printsolution();
 }
