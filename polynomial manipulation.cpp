@@ -43,8 +43,16 @@ void create(int id){
   head=new;
 }
 
+void addterm(int id,int coef,int ex){
+  poly *temp=head;
+  while (temp->tail!=NULL){
+    if (temp->poly_id==id) temp->polynomial=makenewnode(coef,ex);
+    else temp=temp->tail;
+  }
+}
 
 
 int main(){
+  create(head);
   char command[1000];
 }
