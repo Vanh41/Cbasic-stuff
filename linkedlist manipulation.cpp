@@ -52,18 +52,26 @@ void addlast(int k){
     prev=p;
 }
 
-void remove(int k){
+void removed(int k){
   node *find;
-  find=temp=head;
-  if (find->next==NULL) free(find);
-  else
+  find=temp=prev=head;
+  if (find->next==NULL&&find->element==k) {
+    free(find);
+    head=NULL;
+  }
   while (find->next!=NULL){
     if (find->element==k){
-      temp=find;
-      find=find->next;
-      free(temp);
+      prev->next=find->next;
+      free(find);
+      find=prev;
     }
-    else find=find->next;
+    else {
+      if (prev==find) find=find->next;
+      else {
+        prev=prev->next;
+        find=find->next;
+      }
+    }
   }
 }
 
@@ -105,7 +113,7 @@ char command[1000];
         if (strcmp(command,"remove")==0) {
             int k;
             scanf("%d",&k);
-            remove(k);
+            removed(k);
         }
 
         
