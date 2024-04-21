@@ -29,7 +29,17 @@ void printsolution(){
     }
 }
 
+bool check(int k){
+  node *find=head;
+  while (find!=NULL){
+    if (find->element==k) return true;
+    find=find->next;
+  }
+  return false;
+}
+
 void addfirst(int k){
+    if (check(k)==true) return;
     node *new=makenewnode(k);
     new->next=head;
     head=new;
@@ -37,6 +47,7 @@ void addfirst(int k){
 }
 
 void addlast(int k){
+  if (check(k)==true) return;
     node *new=makenewnode(k);
     if (head==NULL){
         head=new;
@@ -126,6 +137,7 @@ void addafter(int u,int v){
     else find=find->next;
   }
 }
+
 
 void addbefore(int u,int v){
   node *find;
