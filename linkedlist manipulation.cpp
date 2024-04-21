@@ -55,9 +55,10 @@ void addlast(int k){
 void removed(int k){
   node *find;
   find=temp=prev=head;
-  if(find->element==k) {
+  while(find->element==k&&find==head) {
     head=head->next;
-    return;
+    prev=prev->next;
+    find=head;
   }
   if (find->next==NULL&&find->element==k) {
     free(find);
@@ -72,15 +73,13 @@ void removed(int k){
     else {
       if (prev==find) find=find->next;
       else {
-        prev=prev->next;
         find=find->next;
+        prev=prev->next;
       }
-    }
+      if (find->next==NULL&&find->element==k) prev->next=NULL;
   }
-  if (find->element==k) {
-    free(find);
-    prev->next=NULL;
-  }
+}
+
 }
 
 bool checkavai(int u,int v){
