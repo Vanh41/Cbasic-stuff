@@ -14,13 +14,9 @@ struct list{
 };
 typedef struct list node;
 
-struct pol{
-  int poly_id;
-  node *polynomial;
-  struct pol *tail;
-};
-typedef struct pol poly; 
-poly *head;
+node *poly[10000];
+node *head[10000];
+node *cur;
 
 node *makenewnode(int coef,int ex){
   node *new =(node*)malloc(sizeof(node));
@@ -30,29 +26,57 @@ node *makenewnode(int coef,int ex){
   return new;
 }
 
-poly *makenewpoly(int id){
-  poly *new=(poly*)malloc(sizeof(poly));
-  new->poly_id=id;
-  new->tail=NULL;
-  return new;
-}
-
-void create(int id){
-  poly *new=makenewpoly(id);
-  new->tail=head;
-  head=new;
-}
-
 void addterm(int id,int coef,int ex){
-  poly *temp=head;
-  while (temp->tail!=NULL){
-    if (temp->poly_id==id) temp->polynomial=makenewnode(coef,ex);
-    else temp=temp->tail;
+   node *news=makenewnode(coef,ex);
+   node *find=head[id];
+   node *prev=NULL;
+   if (head[id]==NULL){
+    head[id]=news;
+   }
+   else if (head[id]->exponent<ex){
+    news->next=head[id];
+    head[id]=news;
+   }
+   else{
+    while (find->next!=NULL&&find->exponent>ex){
+      prev=find;
+      find=find->next;
+    }
+    if (find->next!=NULL&&find->exponent==ex)
+    find->coefficient+=coef;
+    else{
+      news->next=find->next;
+      find->next=news;
+    }
+   }
+}
+
+void print(int id){
+  node *tmp=head[id];
+  while (tmp!=NULL) {
+    printf("%d%d ",tmp->coefficient,tmp->exponent);
+    tmp=tmp->next;
   }
 }
 
 
+
 int main(){
-  create(head);
   char command[1000];
+  while(1){
+    scanf("%s",command);
+    if (strcmp(command,"*")==0) break;
+    if (strcmp(command,"hello")==0) printf("hi");
+    if (strcmp(command,"AddTerm")==0) 
+     {
+      int x,y,z;
+      scanf("%d %d %d",&x,&y,&z);
+      addterm(x,y,z);
+     }
+    if (strcmp(command,"PrintPoly")==0){
+      int x;
+      scanf("%d",&x);
+      print(x);
+    }
+  }
 }
