@@ -59,6 +59,43 @@ void print(int id){
   }
 }
 
+void addpoly(int id1,int id2,int id3){
+  node *temp1=head[id1];
+  node *temp2=head[id2];
+  //head[id3]=NULL; 
+  if (temp1->exponent>temp2->exponent){
+    head[id3]->exponent=temp1->exponent;
+    head[id3]->coefficient=temp1->coefficient;
+    temp1=temp1->next;
+    head[id3]->next=NULL;
+  }
+  else if (temp1->exponent<temp2->exponent){
+    head[id3]->exponent=temp2->exponent;
+    head[id3]->coefficient=temp2->coefficient;
+    temp2=temp2->next;
+    head[id3]->next=NULL;
+  }
+  else {
+    head[id3]->exponent=temp1->exponent;
+    head[id3]->coefficient=temp1->coefficient+temp2->coefficient;
+    temp1=temp1->next;
+    temp2=temp2->next;
+    head[id3]->next=NULL;
+  }
+  //node *pol=head[id3];
+  /*
+  while (temp1!=NULL||temp2!=NULL){
+    if (temp1->exponent>temp2->exponent){
+        addterm(id3,temp1->coefficient,temp1->exponent);
+        temp1=temp1->next;
+    }
+    else if (temp1->exponent<=temp2->exponent){
+      addterm(id3,temp2->coefficient,temp2->exponent);
+      temp2=temp2->next;
+    }
+  }*/
+}
+
 
 
 int main(){
@@ -78,5 +115,11 @@ int main(){
       scanf("%d",&x);
       print(x);
     }
+if (strcmp(command,"AddPoly")==0) 
+     {
+      int x,y,z;
+      scanf("%d %d %d",&x,&y,&z);
+      addpoly(x,y,z);
+     }
   }
 }
