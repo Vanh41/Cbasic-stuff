@@ -64,36 +64,34 @@ void addpoly(int id1,int id2,int id3){
   node *temp2=head[id2];
   //head[id3]=NULL; 
   if (temp1->exponent>temp2->exponent){
-    head[id3]->exponent=temp1->exponent;
-    head[id3]->coefficient=temp1->coefficient;
+    head[id3]=makenewnode(head[id1]->coefficient,head[id1]->exponent);
     temp1=temp1->next;
-    head[id3]->next=NULL;
   }
   else if (temp1->exponent<temp2->exponent){
-    head[id3]->exponent=temp2->exponent;
-    head[id3]->coefficient=temp2->coefficient;
+    head[id3]=makenewnode(head[id2]->coefficient,head[id2]->exponent);
     temp2=temp2->next;
-    head[id3]->next=NULL;
   }
   else {
-    head[id3]->exponent=temp1->exponent;
-    head[id3]->coefficient=temp1->coefficient+temp2->coefficient;
+    head[id3]=makenewnode(head[id1]->coefficient+head[id2]->coefficient,head[id1]->exponent);
     temp1=temp1->next;
     temp2=temp2->next;
-    head[id3]->next=NULL;
   }
   //node *pol=head[id3];
-  /*
-  while (temp1!=NULL||temp2!=NULL){
+  while (temp1->next!=NULL||temp2->next!=NULL){
     if (temp1->exponent>temp2->exponent){
         addterm(id3,temp1->coefficient,temp1->exponent);
         temp1=temp1->next;
     }
-    else if (temp1->exponent<=temp2->exponent){
+    else if (temp1->exponent<temp2->exponent){
       addterm(id3,temp2->coefficient,temp2->exponent);
       temp2=temp2->next;
     }
-  }*/
+    else {
+      addterm(id3,temp2->coefficient+temp1->coefficient,temp2->exponent);
+      temp2=temp2->next;
+      temp1=temp1->next;
+    }
+  }
 }
 
 
