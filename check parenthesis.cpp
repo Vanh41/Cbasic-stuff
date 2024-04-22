@@ -53,7 +53,6 @@ void push(char k){
 
 void pop(){
 	if (top==NULL) return;
-	char x=top->element;
 	node *p=top;
 	top=top->next;
 	free(p);
@@ -69,6 +68,7 @@ bool check(){
 		if (s[i]=='('||s[i]=='{'||s[i]=='[') {
 		push(s[i]);
 	}
+	    else if (top==NULL) return false;
 		else if (match(top->element,s[i])==true) pop();
 		else return false; 
 	}
