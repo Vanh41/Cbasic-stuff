@@ -78,7 +78,7 @@ void addpoly(int id1,int id2,int id3){
     temp2=temp2->next;
   }
   //node *pol=head[id3];
-  while (temp1->next!=NULL||temp2->next!=NULL){
+  while (temp1!=NULL&&temp2!=NULL){
     if (temp1->exponent>temp2->exponent){
         addterm(id3,temp1->coefficient,temp1->exponent);
         temp1=temp1->next;
@@ -92,15 +92,18 @@ void addpoly(int id1,int id2,int id3){
       temp2=temp2->next;
       temp1=temp1->next;
     }
-    /*else if (temp2->next==NULL&&temp1->next!=NULL){
+  }
+  if (temp1!=NULL)
+    while(temp1!=NULL) {
       addterm(id3,temp1->coefficient,temp1->exponent);
       temp1=temp1->next;
-    }
-    else if (temp1->next==NULL&&temp2->next!=NULL){
+  }
+  if (temp2!=NULL)
+    while(temp2!=NULL) {
       addterm(id3,temp2->coefficient,temp2->exponent);
       temp2=temp2->next;
-    }*/
   }
+
 }
 
 
