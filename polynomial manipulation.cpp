@@ -106,6 +106,16 @@ void addpoly(int id1,int id2,int id3){
 
 }
 
+int evaluate(int id,int x){
+  node *temp=head[id];
+  int ans=0;
+  while(temp!=NULL){
+    ans+=temp->coefficient*pow(x,temp->exponent);
+    temp=temp->next;
+  }
+  return ans;
+}
+
 
 
 int main(){
@@ -125,11 +135,17 @@ int main(){
       scanf("%d",&x);
       print(x);
     }
-if (strcmp(command,"AddPoly")==0) 
+    if (strcmp(command,"AddPoly")==0) 
      {
       int x,y,z;
       scanf("%d %d %d",&x,&y,&z);
       addpoly(x,y,z);
+     }
+    if (strcmp(command,"EvaluatePoly")==0) 
+     {
+      int id,x;
+      scanf("%d %d",&id,&x);
+      printf("%d",evaluate(id,x));
      }
   }
 }
