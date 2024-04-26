@@ -84,7 +84,7 @@ char popop(){
 	top2=top2->next;
 	return x;
 	}
-	return ' ';
+	return 'n';
 }
 
 // discard right parenthesis
@@ -114,7 +114,8 @@ int compute(int a,int b, char op){
 
 int evaluate(){
 	for (int i=0;i<strlen(s);i++){
-		if (s[i]=='(') pushop(s[i]);
+		if(s[i] == ' ') continue;
+		else if (s[i]=='(') pushop(s[i]);
 		else if (checkdigit(s[i])==true){
 			int val=0;
 			while(i<strlen(s) && checkdigit(s[i])==true) {
@@ -160,6 +161,8 @@ int evaluate(){
 
 int main(){
 	scanf("%s",s);
+	if (evaluate()==0) printf("NOT_CORRECT");
+	else
 	printf("%d",evaluate());
 	return 0;
 }
