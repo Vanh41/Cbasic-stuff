@@ -80,8 +80,8 @@ void pushop(char a){
 
 char popop(){
 	if (isemptyop()==false){
-	char x=top1->element;
-	top1=top1->next;
+	char x=top2->element;
+	top2=top2->next;
 	return x;
 	}
 	return ' ';
