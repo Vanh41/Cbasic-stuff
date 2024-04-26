@@ -163,7 +163,7 @@ int main(){
 	scanf("%[^\n]s",s);
 	if (evaluate()==0) printf("NOT_CORRECT");
 	else
-	printf("%ld",evaluate()%(1000000000+7));
+	printf("%lld",evaluate()%(1000000000+7));
 	return 0;
 }
 
