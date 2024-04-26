@@ -17,7 +17,7 @@ struct stack2{
 };
 typedef struct stack2 nodeoperator;
 
-char s[20000];
+char s[50000];
 
 nodevalue *top1=NULL;
 nodeoperator *top2=NULL;
@@ -163,7 +163,7 @@ int main(){
 	scanf("%[^\n]s",s);
 	if (evaluate()==0) printf("NOT_CORRECT");
 	else
-	printf("%lld",evaluate()%(1000000000+7));
+	printf("%ld",evaluate()%(1000000000+7));
 	return 0;
 }
 
