@@ -6,7 +6,7 @@
 #include <stdbool.h>
 
 struct stack1{
-	int element;
+	long long element;
 	struct stack1 *next;
 };
 typedef struct stack1 nodevalue;
@@ -17,7 +17,7 @@ struct stack2{
 };
 typedef struct stack2 nodeoperator;
 
-char s[1000];
+char s[20000];
 
 nodevalue *top1=NULL;
 nodeoperator *top2=NULL;
@@ -35,14 +35,14 @@ bool isemptyop(){
 
 // dealing w/ val
 
-nodevalue *makenodeval(int a){
+nodevalue *makenodeval(long long a){
 	nodevalue *new=(nodevalue*)malloc(sizeof(nodevalue));
 	new->element=a;
 	new->next=NULL;
 	return new;
 }
 
-void pushval(int a){
+void pushval(long long a){
 	nodevalue *tmp=makenodeval(a);
 	if (isemptyval()==true) {
 		top1=tmp;
@@ -52,9 +52,9 @@ void pushval(int a){
 	top1=tmp;
 }
 
-int popvalue(){
+long long popvalue(){
 	if (isemptyval()==true) return 0;
-	int x=top1->element;
+	long long x=top1->element;
 	top1=top1->next;
 	return x;
 }
@@ -94,7 +94,7 @@ void pop(){
 }
 
 
-int presedence(char operator){
+long long presedence(char operator){
 	if (operator=='+') return 1;
 	if (operator=='*') return 2;
 	return 0;
@@ -105,19 +105,19 @@ bool checkdigit(char a){
 	return false;
 }
 
-int compute(int a,int b, char op){
+long long compute(long long a,long long b, char op){
 	if (op=='+') return a+b;
 	if (op=='*') return a*b;
 	return 0;
 }
 // 82*((45+(58))+91)*((11*59*21)+91)*35*57*25
 
-int evaluate(){
-	for (int i=0;i<strlen(s);i++){
+long long evaluate(){
+	for (long long i=0;i<strlen(s);i++){
 		if(s[i] == ' ') continue;
 		else if (s[i]=='(') pushop(s[i]);
 		else if (checkdigit(s[i])==true){
-			int val=0;
+			long long val=0;
 			while(i<strlen(s) && checkdigit(s[i])==true) {
 				val=val*10+s[i]-'0';
 				i++;
@@ -128,29 +128,29 @@ int evaluate(){
 		else if (s[i]==')'){
 			 while (top2->element!='('&&isemptyop()==false){
 				char op=popop();
-				int a=popvalue();
-				int b=popvalue();
-				int c=compute(a,b,op);
+				long long a=popvalue();
+				long long b=popvalue();
+				long long c=compute(a,b,op);
 				pushval(c);
 			 }
 			 if (isemptyop()==false) pop();
 		}
 		else{
 			while(isemptyop()==false && presedence(top2->element)>=presedence(s[i])){
-				int a=popvalue();
-				int b=popvalue();
+				long long a=popvalue();
+				long long b=popvalue();
 				char op = popop();
-				int c=compute(a,b,op);
+				long long c=compute(a,b,op);
 				pushval(c);
 			}
 			pushop(s[i]);
 		}
 	}
 	while (isemptyop()==false){
-		int a=popvalue();
-		int b=popvalue();
+		long long a=popvalue();
+		long long b=popvalue();
 		char op=popop();
-		int c=compute(a,b,op);
+		long long c=compute(a,b,op);
 		pushval(c);
 	}
 	if (isemptyval()==false) return top1->element;
@@ -163,7 +163,7 @@ int main(){
 	scanf("%[^\n]s",s);
 	if (evaluate()==0) printf("NOT_CORRECT");
 	else
-	printf("%d",evaluate()%(1000000000+7));
+	printf("%lld",evaluate()%(1000000000+7));
 	return 0;
 }
 
@@ -197,6 +197,6 @@ idea:
     2 Pop the value stack twice, getting two operands.
     3 Apply the operator to the operands, in the correct order.
     4 Push the result onto the value stack.
-3. At this point the operator stack should be empty, and the value
+3. At this polong long the operator stack should be empty, and the value
    stack should have only one value in it, which is the final result.
 */
