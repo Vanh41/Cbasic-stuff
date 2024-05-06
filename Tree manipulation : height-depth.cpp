@@ -74,6 +74,16 @@ int height(node *root){
 	return maxheight+1;
 }
 
+void freeTree(node *r){
+	if (r==NULL) return;
+	node *p=r->leftmostchild;
+	while (p!=NULL){
+		node *np=p->rightsibling;
+		freeTree(p);
+		p=np;
+	}
+	free(r);
+}
 
 
 int main(){
