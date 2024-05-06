@@ -79,7 +79,7 @@ int height(node *root){
 int main(){
 	char command[100];
 	int ans[10000];
-	count=0;
+	int count=0;
 	while (1){
 		scanf("%s",command);
 		if (strcmp(command,"*")==0) break;
@@ -101,16 +101,17 @@ int main(){
 			int u;
 			scanf("%d",&u);
 			node*p=find(root1,u);
-			printf("%d\n",height(p));
+			ans[count++]=height(p);
 		}
 		else
 		if (strcmp(command,"Depth")==0) {
 			int u;
 			scanf("%d",&u);
 			node*p=find(root1,u);
-			printf("%d\n",depth(p));
+			ans[count++]=depth(p);
 		}
  }
+ for (int i=0;i<count;i++) printf("%d\n",ans[i]);
 }
 		
 
