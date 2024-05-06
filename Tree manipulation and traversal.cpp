@@ -72,7 +72,7 @@ void postorder(node *root){
 	}
 	printf("%d ",root->id);
 }
-
+// print tung subtree
 void inorder(node *root){
 	if (root==NULL) return;
 	node *p=root->leftmostchild;
