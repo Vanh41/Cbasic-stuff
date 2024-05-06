@@ -73,6 +73,19 @@ void postorder(node *root){
 	printf("%d ",root->id);
 }
 
+void inorder(node *root){
+	if (root==NULL) return;
+	node *p=root->leftmostchild;
+	inorder(p);
+	printf("%d ",root->id);
+	if (p==NULL) return;
+	p=p->rightsibling;
+	while(p!=NULL){
+		inorder(p);
+		p=p->rightsibling;
+	}
+}
+
 
 
 
@@ -111,11 +124,19 @@ int main(){
 		else
 		if (strcmp(command,"PreOrder")==0) {
 			preorder(root1);
+			printf("\n");
 		}
 		else
 		if (strcmp(command,"PostOrder")==0) {
 			postorder(root1);
+			printf("\n");
 		}
+		else
+		if (strcmp(command,"InOrder")==0) {
+			inorder(root1);
+			printf("\n");
+		}
+		
  }
  //for (int i=0;i<count;i++) printf("%d\n",ans[i]);
 }
