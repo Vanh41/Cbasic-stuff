@@ -51,6 +51,7 @@ void insert(node *root,int u,int v){
 	q->parent=p;	
 }
 
+// print tu root->leaves
 void preorder(node *root){
 	if (root==NULL) return;
 	printf("%d ",root->id);
@@ -60,6 +61,18 @@ void preorder(node *root){
 		p=p->rightsibling;	
 	}
 }
+
+// print tu leaves-> root
+void postorder(node *root){
+	if (root==NULL) return;
+	node *p=root->leftmostchild;
+	while (p!=NULL) {
+		postorder(p);
+		p=p->rightsibling;
+	}
+	printf("%d ",root->id);
+}
+
 
 
 
@@ -98,6 +111,10 @@ int main(){
 		else
 		if (strcmp(command,"PreOrder")==0) {
 			preorder(root1);
+		}
+		else
+		if (strcmp(command,"PostOrder")==0) {
+			postorder(root1);
 		}
  }
  //for (int i=0;i<count;i++) printf("%d\n",ans[i]);
