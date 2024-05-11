@@ -12,10 +12,9 @@ int main(){
     char line[10000];
     int c;
     while((c=fgetc(fptr1))!=EOF){
-        printf("Convert the letter into uppercase letter");
+       // printf("Convert the letter into uppercase letter");
         c=toupper(c);
         fputc(c,fptr2);
-        putchar(c);
     }
     fclose(fptr1);
     fclose(fptr2);
