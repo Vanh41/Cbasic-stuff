@@ -13,6 +13,17 @@ struct list{
 };
 typedef struct list node;
 
+node *makenode(char acc[100], char pass[100], float p){
+    node *newnode=(node*)malloc(sizeof(node));
+    strcpy(newnode->username,acc);
+    strcpy(newnode->password,pass);
+    newnode->point=p;
+    newnode->next=NULL;
+    return newnode;
+}
+
+
+
 
 
 
