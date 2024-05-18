@@ -18,5 +18,5 @@ int BCNN(int a,int b){
 int main(){
  int a,b;
  scanf("%d %d",&a,&b);
- printf("%d",UCLN(a,b));
+ printf("%d",BCNN(a,b));
 }
