@@ -31,8 +31,33 @@ void addlist(char acc[100], char pass[100], float p){
 }
 
 void generatelist(){
-
+    FILE *fptr=fopen("sinhvien.txt","r+w");
+    char acc[100];
+    char pass[100];
+    float p;
+    while(fscanf(fptr,"%s %s %f",acc,pass,&p)!=EOF){
+        addlist(acc,pass,p);
+    }
 }
+
+void printsolution(){
+    node *tmp;
+    tmp=head;
+    while(tmp != NULL){
+        printf("%s %s %f\n",tmp->username,tmp->password,tmp->point);
+        tmp=tmp->next;
+    }
+}
+
+bool check(char acc[100],char pass[100]){
+    node *traverse=head;
+    while (traverse!=NULL){
+        if (strcmp(traverse->username,acc)==0&&strcmp(traverse->password,pass)==0) return true;
+        else traverse=traverse->next;
+    }
+    return false;
+}
+
 
 
 
@@ -46,6 +71,7 @@ void login(){
         scanf("%s",username);
         printf("Password: \n");
         scanf("%s",password);
+        
     }
 }
 
@@ -54,21 +80,26 @@ void login(){
 
 int main(){
     system("clear");
+    generatelist();
     while (1){
         // menu 
         int n;
         printf("1. LOGIN \n");
         printf("2. QUIT \n");
         scanf("%d",&n);
+        //quit command
         if (n==2) {
             system("clear");
             break;
         }
-        else if (n==1){
+        //log command
+        if (n==1){
             system("clear");
-            
         }
-        else break;
+        else {
+            system("clear");
+            break;
+        }
     }
     return 0;
 }
