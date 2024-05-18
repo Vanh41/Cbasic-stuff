@@ -13,6 +13,8 @@ struct list{
 };
 typedef struct list node;
 
+node *head;
+
 node *makenode(char acc[100], char pass[100], float p){
     node *newnode=(node*)malloc(sizeof(node));
     strcpy(newnode->username,acc);
@@ -22,15 +24,20 @@ node *makenode(char acc[100], char pass[100], float p){
     return newnode;
 }
 
+void addlist(char acc[100], char pass[100], float p){
+    node *new=makenode(acc,pass,p);
+    new->next=head;
+    head=new;
+}
+
+void generatelist(){
+
+}
 
 
 
 
-
-
-
-
-void log(){
+void login(){
     int count=0;
     while (count<=3){
         char username[100];
@@ -46,7 +53,6 @@ void log(){
 
 
 int main(){
-    FILE *fptr1 , *fptr2;
     system("clear");
     while (1){
         // menu 
@@ -62,6 +68,7 @@ int main(){
             system("clear");
             
         }
+        else break;
     }
     return 0;
 }
