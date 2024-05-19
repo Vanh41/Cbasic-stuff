@@ -82,10 +82,23 @@ int countnode(node *r){
     return count;
 }
 
+int countchildren(node *r){
+    int count=0;
+    node *p=r->leftmostchild;
+    if (p==NULL) return 0;
+    else{
+        while (p!=NULL){
+            count++;
+            p=p->rightsibling;
+        }
+    }
+    return count;
+}
+
 int countkchildren(node *r,int k){
     int count=0;
     node *p=r->leftmostchild;
-    if (countnode(r)==k) count++;
+    if (countchildren(r)==k) count++;
     while (p!=NULL){
         count+=countkchildren(p,k);
         p=p->rightsibling;
