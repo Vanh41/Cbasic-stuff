@@ -51,6 +51,23 @@ void insert(node *r,int u,int v){
     q->parent=p;
 }
 
+int countleaves(node *r){
+    int count=0;
+    if (r->leftmostchild==NULL) {
+        count++;
+        return count;
+    }
+    else{
+        node *p=r->leftmostchild;
+        while (p!=NULL){
+            count+=countleaves(p);
+            p=p->rightsibling;
+        }
+    }
+    return count;
+}
+
+
 
 int main(){
 	char command[100];
@@ -72,6 +89,13 @@ int main(){
 			scanf("%d %d",&u,&v);
 			insert(root1,u,v);
 		}
+        else
+        if (strcmp(command,"CountLeaves")==0){
+            int u;
+            scanf("%d",&u);
+            ans[count++]=countleaves(find(root1,u));
+        }
 
     }
+    for (int i=0;i<count;i++) printf("%d\n",ans[i]);
 }
