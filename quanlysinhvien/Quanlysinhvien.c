@@ -14,6 +14,7 @@ struct list{
 typedef struct list node;
 
 node *head;
+node *cur;
 
 node *makenode(char acc[100], char pass[100], float p){
     node *newnode=(node*)malloc(sizeof(node));
@@ -38,7 +39,10 @@ void generatelist(){
     while(fscanf(fptr,"%s %s %f",acc,pass,&p)!=EOF){
         addlist(acc,pass,p);
     }
+    fclose(fptr);
 }
+
+
 
 void printsolution(){
     node *tmp;
@@ -49,16 +53,33 @@ void printsolution(){
     }
 }
 
-bool check(char acc[100],char pass[100]){
+node *check(char acc[100],char pass[100]){
     node *traverse=head;
     while (traverse!=NULL){
-        if (strcmp(traverse->username,acc)==0&&strcmp(traverse->password,pass)==0) return true;
+        if (strcmp(traverse->username,acc)==0&&strcmp(traverse->password,pass)==0) return traverse;
         else traverse=traverse->next;
     }
-    return false;
+    return NULL;
 }
 
 
+bool checkpass(char password[100]){
+	if (strlen(password)<6) return false;
+	if (strtok(password," ")!=NULL) return false;
+	return true;
+}
+
+void changepass(){
+    char temp1[100],temp2[100];
+    printf("Input new password: \n");
+    scanf("%s",temp1);
+    printf("Repeat new password: \n" );
+    scanf("%s",temp2);
+    if (strcmp(temp1,temp2)!=0) {
+        printf("The new password is invalid\n");
+        return;
+    }
+}
 
 
 
@@ -71,7 +92,53 @@ void login(){
         scanf("%s",username);
         printf("Password: \n");
         scanf("%s",password);
-        
+        // check valid 
+        if (checkpass(password)==false) {
+            system("clear");
+            printf("Invalid password\n");
+            count++;
+        }
+        node *temp=check(username,password);
+        if (temp==NULL) {
+            system("clear");
+            printf("Invalid username or password\n");
+            count++;
+        } 
+        if (temp!=NULL){
+            system("clear");
+            printf("Login successfully\n");
+            cur=temp;
+            return;
+        }
+
+    }
+}
+
+void studentmode(){
+    while(1){
+    printf("1. Show score \n");
+    printf("2. Change password \n");
+    printf("3. Quit \n");
+    int n;
+    scanf("%d",&n);
+    if (n==1) {
+        system("clear");
+        printf("%.2f\n",cur->point);
+        int k;
+        printf("1. Quit\n");
+        scanf("%d",&k);
+        if (k==1) {
+            system("clear");
+            continue;
+        }
+    }
+    if (n==3) {
+        system("clear");
+        return;
+    }
+    if (n==2) {
+
+    }
     }
 }
 
@@ -95,6 +162,10 @@ int main(){
         //log command
         if (n==1){
             system("clear");
+            login();
+            getchar();
+            studentmode();
+
         }
         else {
             system("clear");
