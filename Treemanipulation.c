@@ -67,6 +67,31 @@ int countleaves(node *r){
     return count;
 }
 
+int countnode(node *r){
+    int count=0;
+    node *p=r->leftmostchild;
+    if (p==NULL) {
+        return count;
+    }
+    else {
+        while(p!=NULL){
+            count+=countnode(p)+1;
+            p=p->rightsibling;
+        }
+    }
+    return count;
+}
+
+int countkchildren(node *r,int k){
+    int count=0;
+    node *p=r->leftmostchild;
+    if (countnode(r)==k) count++;
+    while (p!=NULL){
+        count+=countkchildren(p,k);
+        p=p->rightsibling;
+    }
+    return count;
+}
 
 
 int main(){
@@ -94,6 +119,13 @@ int main(){
             int u;
             scanf("%d",&u);
             ans[count++]=countleaves(find(root1,u));
+        }
+        if (strcmp(command,"CountKChildren")==0){
+            int u;
+            int k;
+            scanf("%d %d",&u,&k);
+             ans[count++]=countkchildren(find(root1,u),k);
+           // ans[count++]=countnode(find(root1,u));
         }
 
     }
