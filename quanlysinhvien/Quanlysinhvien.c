@@ -43,6 +43,33 @@ void generatelist(){
 }
 
 
+node *findacc(char acc[100]){
+    node *traverse=head;
+    while (traverse!=NULL){
+        if (strcmp(traverse->username,acc)==0) return traverse;
+        else traverse=traverse->next;
+    }
+    return NULL;
+}
+
+void deletenode(char acc[100]){
+    node *prev=head;
+    node *traverse=head;
+    while (traverse!=NULL){
+        if (strcmp(traverse->username,acc)==0) {
+            prev->next=traverse->next;
+            free(traverse);
+            return;
+        }
+        else {
+            prev=traverse;
+            traverse=traverse->next;
+        }
+    }
+    return;    
+}
+
+
 
 void printsolution(){
     node *tmp;
@@ -79,6 +106,46 @@ void addstudent(){
     printf("Add student successfully\n");
 }
 
+void deletestudent(){
+    char acc[100];
+    printf("Input username:\n");
+    scanf("%s",acc);
+    node *temp=findacc(acc);
+    if (temp==NULL) {
+        system("clear");
+        printf("User is not found\n");
+        return;
+    }
+    if (temp!=NULL){
+        system("clear");
+        printf("Student information:\n");
+        printf("Username: %s\nPassword: %s\nScore: %.2f\n",temp->username,temp->password,temp->point);
+        printf("1. Delete student\n");
+        printf("2. Quit\n");
+        int n;
+        scanf("%d",&n);
+        if (n==2) {
+            system("clear");
+            return;
+        }
+        if (n==1 ){
+            system("clear");
+            deletenode(acc);
+            printf("Removed successfully\n");
+        }
+    }
+}
+
+void save(){
+    FILE *fptr=fopen("sinhvien.txt","w");
+    node *temp=head;
+    while (temp!=NULL){
+        fprintf(fptr,"%s %s %.2f\n",temp->username,temp->password,temp->point);
+        temp=temp->next;
+    }
+    fclose(fptr);
+}
+
 node *check(char acc[100],char pass[100]){
     node *traverse=head;
     while (traverse!=NULL){
@@ -87,6 +154,7 @@ node *check(char acc[100],char pass[100]){
     }
     return NULL;
 }
+
 
 
 bool checkpass(char password[100]){
@@ -167,6 +235,7 @@ void studentmode(){
     }
     if (n==3) {
         system("clear");
+        save();
         return;
     }
     if (n==2) {
@@ -186,6 +255,7 @@ void adminmode(){
         scanf("%d",&n);
         if (n==4) {
             system("clear");
+            save();
             return;
         }
         if (n==2){
@@ -202,6 +272,10 @@ void adminmode(){
         if (n==1){
             system("clear");
             addstudent();
+        }
+        if (n==3){
+            system("clear");
+            deletestudent();
         }
     }
 }
@@ -237,6 +311,5 @@ int main(){
             break;
         }
     }
-    printsolution();
     return 0;
 }
