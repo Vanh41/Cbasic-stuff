@@ -302,9 +302,8 @@ int main(){
             system("clear");
             login();
             getchar();
-            //studentmode();
-            adminmode();
-
+            if (strcmp(cur->username,"Admin")!=0) studentmode();
+            else adminmode();
         }
         else {
             system("clear");
