@@ -13,6 +13,8 @@ struct tree{
 };
 typedef struct tree node;
 
+node *root1;
+
 node *makenode(int id){
     node *new=(node*)malloc(sizeof(node));
     new->id=id;
@@ -50,7 +52,26 @@ void insert(node *r,int u,int v){
 }
 
 
-
 int main(){
-    printf("hello world");
+	char command[100];
+	int ans[10000];
+	int count=0;
+	while (1){
+		scanf("%s",command);
+		if (strcmp(command,"*")==0) break;
+		else
+		if (strcmp(command,"MakeRoot")==0) {
+			int u;
+			scanf("%d",&u);
+			root1=makenode(u);
+		}
+		else
+		if (strcmp(command,"Insert")==0) {
+			int u;
+			int v;
+			scanf("%d %d",&u,&v);
+			insert(root1,u,v);
+		}
+
+    }
 }
