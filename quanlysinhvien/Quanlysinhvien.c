@@ -53,6 +53,32 @@ void printsolution(){
     }
 }
 
+void printscore(){
+    node *tmp;
+    tmp=head;
+    while(tmp != NULL){
+        if (strcmp(tmp->username,"Admin")!=0){
+        printf("%s %s %f\n",tmp->username,tmp->password,tmp->point);
+        tmp=tmp->next;
+        }
+        else tmp=tmp->next;
+    }
+}
+
+void addstudent(){
+    char acc[100],pass[100];
+    float point;
+    printf("Input username:\n");
+    scanf("%s",acc);
+    printf("Input password:\n");
+    scanf("%s",pass);
+    printf("Input student point:\n");
+    scanf("%f",&point);
+    addlist(acc,pass,point);
+    system("clear");
+    printf("Add student successfully\n");
+}
+
 node *check(char acc[100],char pass[100]){
     node *traverse=head;
     while (traverse!=NULL){
@@ -76,7 +102,14 @@ void changepass(){
     printf("Repeat new password: \n" );
     scanf("%s",temp2);
     if (strcmp(temp1,temp2)!=0) {
+        system("clear");
         printf("The new password is invalid\n");
+        return;
+    }
+    if (strcmp(temp1,temp2)==0){
+        system("clear");
+        printf("Password changed successfully\n");
+        strcpy(cur->password,temp1);
         return;
     }
 }
@@ -118,7 +151,7 @@ void studentmode(){
     while(1){
     printf("1. Show score \n");
     printf("2. Change password \n");
-    printf("3. Quit \n");
+    printf("3. Save and quit \n");
     int n;
     scanf("%d",&n);
     if (n==1) {
@@ -137,8 +170,39 @@ void studentmode(){
         return;
     }
     if (n==2) {
-
+        system("clear");
+        changepass();
     }
+    }
+}
+
+void adminmode(){
+    while (1){
+        printf("1. Add student\n");
+        printf("2. Print all score\n");
+        printf("3. Delete student\n");
+        printf("4. Save and quit\n");
+        int n;
+        scanf("%d",&n);
+        if (n==4) {
+            system("clear");
+            return;
+        }
+        if (n==2){
+            system("clear");
+            printscore();
+            int k;
+            printf("1. Quit\n");
+            scanf("%d",&k);
+            if (k==1) {
+            system("clear");
+            continue;
+        }
+        }
+        if (n==1){
+            system("clear");
+            addstudent();
+        }
     }
 }
 
@@ -164,7 +228,8 @@ int main(){
             system("clear");
             login();
             getchar();
-            studentmode();
+            //studentmode();
+            adminmode();
 
         }
         else {
@@ -172,5 +237,6 @@ int main(){
             break;
         }
     }
+    printsolution();
     return 0;
 }
