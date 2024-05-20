@@ -12,46 +12,41 @@ struct bitree{
 };
 typedef struct bitree node;
 
-node *mroot;
+node *root;
 
 node *makenode(int u){
-	node *newn=(node*)malloc(sizeof(node));
-	newn->id=u;
-	newn->leftchild=NULL;
-	newn->rightchild=NULL;
-	return newn;
+	node *p=(node*)malloc(sizeof(node));
+	p->id=u;
+	p->leftchild=NULL;
+	p->rightchild=NULL;
+	return p;
 }
 
-node *find(node *r,int v){
+
+node *find(node *r,int u){
 	if (r==NULL) return NULL;
-	if (r->id==v) return r;
-	node *p=r->leftchild;
-	node *q=r->rightchild;
-	while(p!=NULL) p=find(p,v);
+	if (r->id==u) return r;
+	node *p=find(r->leftchild,u);
 	if (p!=NULL) return p;
-	while(q!=NULL) q=find(q,v);
-	if (q!=NULL) return q;
-	return NULL;
+	return find(r->rightchild,u);
 }
 
-void addleft(int u,int v){
-	node *temp=makenode(u);
-	node *p=find(mroot,v);
-	if (p==NULL) return;
-	if (p->leftchild==NULL) {
-		p->leftchild=temp;
-		return;
-	}
+void addleft(int u,int v,node *r){
+	node *p=find(r,v);
+	if (p==NULL) return ;
+	if (p->leftchild!=NULL) return;
+	node *q=find(r,u);
+	if (q!=NULL) return;
+	p->leftchild=makenode(u);
 }
 
-void addright(int u,int v){
-	node *temp=makenode(u);
-	node *p=find(mroot,v);
+void addright(int u,int v,node *r){
+	node *p=find(r,v);
 	if (p==NULL) return;
-	if (p->rightchild==NULL) {
-		p->rightchild=temp;
-		return;
-	}
+	if (p->rightchild!=NULL) return;
+	node *q=find(r,u);
+	if (q!=NULL) return;
+	p->rightchild=makenode(u);
 }
 
 void preorder(node *r){
@@ -61,34 +56,60 @@ void preorder(node *r){
 	preorder(r->rightchild);
 }
 
+void inorder(node *r){
+	if (r==NULL) return;
+	inorder(r->leftchild);
+	printf("%d ",r->id);
+	inorder(r->rightchild);
+}
 
-
-
+void postorder(node *r){
+	if (r==NULL) return;
+	postorder(r->leftchild);
+	postorder(r->rightchild);
+	printf("%d ",r->id);
+}
 
 
 
 int main(){
-  char command[1000];
-  while (1){
-	scanf("%s",command);
-	if (strcmp(command,"MakeRoot")==0) {
-		int u;
-		scanf("%d",&u);
-		mroot=makenode(u);
-	}
-	if (strcmp(command,"AddLeft")==0) {
-		int u,v;
-		scanf("%d %d",&u,&v);
-		addleft(u,v);
-	}
-	if (strcmp(command,"AddRight")==0) {
-		int u,v;
-		scanf("%d %d",&u,&v);
-		addright(u,v);
-	}
-	if (strcmp(command,"PreOrder")==0) {
-		preorder(mroot);
-	}
-	if (strcmp(command,"*")==0) break;
-  }
+	char command[100];
+	while (1){
+		scanf("%s",command);
+		if (strcmp(command,"*")==0) break;
+		if (strcmp(command,"MakeRoot")==0){
+			int u;
+			scanf("%d",&u);
+			root=makenode(u);
+		}
+		else
+		if (strcmp(command,"AddLeft")==0){
+			int u,v;
+			scanf("%d %d",&u,&v);
+			addleft(u,v,root);
+		}
+		else
+		if (strcmp(command,"AddRight")==0){
+			int u,v;
+			scanf("%d %d",&u,&v);
+			addright(u,v,root);
+		}
+		else
+		if (strcmp(command,"PreOrder")==0){
+			preorder(root);
+			printf("\n");
+		}
+		else 
+		if (strcmp(command,"InOrder")==0){
+			inorder(root);
+			printf("\n");
+		}
+		else
+		if (strcmp(command,"PostOrder")==0){
+			postorder(root);
+			printf("\n");
+		}
+		
+		
+	}	
 }
