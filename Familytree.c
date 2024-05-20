@@ -14,7 +14,7 @@ struct tree{
 typedef struct tree node;
 
 node *root;
-node *nodes[1000];
+node *nodes[100000];
 
 node *makenode(char name[100]){
     node *p=(node*)malloc(sizeof(node));
@@ -26,7 +26,7 @@ node *makenode(char name[100]){
 }
 
 node *findnode(char name[100]){
-    for (int i=0;i<=100;i++)
+    for (int i=0;i<100000;i++)
      if (strcmp(nodes[i]->name,name)==0) return nodes[i];
     return NULL;
 }
@@ -76,37 +76,38 @@ int height(node *nod){
 
 int main(){
 	int count=0;
-	node *child[100];
-	node *parent[100];
-   while (1){
-   	scanf("%s",child[count]->name);
-   	if (strcmp(child[count]->name,"***")!=0){
-   	 	scanf("%s",parent[count]->name);
-   	 	addchild(child[count],parent[count]);
-   	 	count++;
-		}
-	else {
-		char command[100];
-		while(1){
-		scanf("%s",command);
-		
-		if (strcmp(command,"descendants")==0) {
-			char name[100];
-			scanf("%s",name);
-			int p=countnodes(findnode(name));
-			printf("%d\n",p);
-		}
-		else
-		if (strcmp(command,"generation")==0) {
-			char name[100];
-			scanf("%s",name);
-			int p=height(findnode(name));
-			printf("%d\n",p);
-		}
-		else
-		if (strcmp(command,"***")==0) break;	
-		}
-	}
-	if (strcmp(child[count]->name,"***")==0) break;
-	}  
+    int ans[10000];
+    int tmp=0;
+   	while (1){
+        char name1[100];
+        scanf("%s",name1);
+        if (strcmp(name1,"***")!=0){
+            char name2[100];
+            scanf("%s",name2);
+            nodes[count++]=makenode(name1);
+            nodes[count++]=makenode(name2);
+            addchild(findnode(name1),findnode(name2));
+        }
+        else {
+            char command[100];
+            while(1){
+                scanf("%s",command);
+                if (strcmp(command,"descendants")==0){
+                    char name3[100];
+                    scanf("%s",name3);
+                    ans[tmp++]=countnodes(findnode(name3));
+                }
+                if (strcmp(command,"generation")==0){
+                    char name3[100];
+                    scanf("%s",name3);
+                    ans[tmp++]=height(findnode(name3));
+                }
+                if (strcmp(command,"***")==0){
+                    break;
+                }
+            }
+            if (strcmp(command,"***")==0) break;
+        }
+    }
+    for (int i=0;i<tmp;i++) printf("%d\n",ans[i]);
 }
