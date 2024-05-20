@@ -61,11 +61,52 @@ int height(node *nod){
 	if (nod==NULL) return 0;
 	int maxh=0;
 	node *p=nod->leftmostchild;
-	
+	while (p!=NULL){
+		int h=height(p);
+		if (h>maxh) maxh=h;
+		p=p->rightsibling;
+	}
+	return maxh;
 }
+
+//descendants <name>: return number of descendants of the given <name>
+//generation <name>: return the number of generations of the descendants of the given <name>
 
 
 
 int main(){
-    
+	int count=0;
+	node *child[100];
+	node *parent[100];
+   while (1){
+   	scanf("%s",child[count]->name);
+   	if (strcmp(child[count]->name,"***")!=0){
+   	 	scanf("%s",parent[count]->name);
+   	 	addchild(child[count],parent[count]);
+   	 	count++;
+		}
+	else {
+		char command[100];
+		while(1){
+		scanf("%s",command);
+		
+		if (strcmp(command,"descendants")==0) {
+			char name[100];
+			scanf("%s",name);
+			int p=countnodes(findnode(name));
+			printf("%d\n",p);
+		}
+		else
+		if (strcmp(command,"generation")==0) {
+			char name[100];
+			scanf("%s",name);
+			int p=height(findnode(name));
+			printf("%d\n",p);
+		}
+		else
+		if (strcmp(command,"***")==0) break;	
+		}
+	}
+	if (strcmp(child[count]->name,"***")==0) break;
+	}  
 }
