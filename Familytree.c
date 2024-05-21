@@ -66,7 +66,7 @@ int height(node *nod){
 		if (h>maxh) maxh=h;
 		p=p->rightsibling;
 	}
-	return maxh;
+	return maxh+1;
 }
 
 //descendants <name>: return number of descendants of the given <name>
