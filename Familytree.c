@@ -95,12 +95,12 @@ int main(){
                 if (strcmp(command,"descendants")==0){
                     char name3[100];
                     scanf("%s",name3);
-                    ans[tmp++]=countnodes(findnode(name3));
+                    ans[tmp++]=countnodes(findnode(name3))-1;
                 }
                 if (strcmp(command,"generation")==0){
                     char name3[100];
                     scanf("%s",name3);
-                    ans[tmp++]=height(findnode(name3));
+                    ans[tmp++]=height(findnode(name3))-1;
                 }
                 if (strcmp(command,"***")==0){
                     break;
