@@ -5,6 +5,13 @@
 #include <math.h>
 #include <stdbool.h>
 
+int a[1000];
+int n;
+
+
 int main(){
-    printf("hello world");
+  scanf("%d",&n);   
+  for (int i=0;i<n;i++) scanf("%d",&a[i]);
+  for (int i=0;i<n;i++) printf("%d",a[i]);
+
 }
