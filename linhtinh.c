@@ -8,6 +8,7 @@
 void ham3(unsigned int n,unsigned int b){
     if (n==0||b==0) return;
     else{
+        printf("%d %d\n",n,b);
         ham3(n/b,b);
         printf("%d",n%b);
     }
