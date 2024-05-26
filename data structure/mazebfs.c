@@ -19,7 +19,6 @@ struct queue {
 typedef struct queue node;
 
 node *head,*tail;
-node *listnode[1000];
 node *finalnode;
 
 node *makenode(int row,int col,int step,node *parent){
@@ -71,10 +70,6 @@ bool target(int i,int j){
     return false;
 }
 
-void addlist(node *p){
-    listnode[sizelist++] = p;
-}
-
 const int dr[4] = {1,-1,0,0};
 const int dc[4] = {0,0,1,-1};
 
@@ -89,7 +84,6 @@ int main(){
 
     initQueue();
     node* startnode = makenode(r,c,0,NULL);
-    addlist(startnode);
     push(startnode);
     visited[r][c]=1;
     while (isempty()!=true){
