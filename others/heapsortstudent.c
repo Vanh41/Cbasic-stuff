@@ -11,7 +11,7 @@ struct student{
 	
 };
 student s[100001];
-
+student temp[100001];
 void swap(int i,int j){
 	student temp=s[i];
 	s[i]=s[j];
@@ -47,10 +47,12 @@ int main(){
 	scanf("%d",&n);
 	for (int i=1;i<=n;i++) {
 		scanf("%s %d",s[i].id,&s[i].grade);
+		temp[i].grade=s[i].grade;
+		strcpy(temp[i].id,s[i].id);
 	}
 	heapsort(n);
 	printf("\n");
-	for (int i=1;i<=n;i++)
-		printf("%s %d\n",s[i].id,s[i].grade);
+	for (int i=n;i>=1;i--)
+		printf("%s %d\n",temp[i].id,i-1);
 		
 }
