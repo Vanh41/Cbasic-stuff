@@ -37,7 +37,7 @@ void buildheap(int n){
 void heapsort(int n){
 	buildheap(n);
 	for (int i=n;i>=2;i--){
-		swap(1,n);
+		swap(1,i);
 		heapify(1,i-1);
 	}
 }
@@ -49,6 +49,7 @@ int main(){
 		scanf("%s %d",s[i].id,&s[i].grade);
 	}
 	heapsort(n);
+	printf("\n");
 	for (int i=1;i<=n;i++)
 		printf("%s %d\n",s[i].id,s[i].grade);
 		
