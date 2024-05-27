@@ -5,11 +5,12 @@
 #include <math.h>
 #include <stdbool.h>
 
-struct student{
+typedef struct student{
 	char id[11];
 	int grade;
+	int pos;
 	
-};
+}student;
 student s[100001];
 student temp[100001];
 void swap(int i,int j){
@@ -42,6 +43,31 @@ void heapsort(int n){
 	}
 }
 
+
+void heapify2(int i,int n){
+	int l=2*i;
+	int r=2*i+1;
+	int maxidx=i;
+	if (l<=n&&strcmp(s[l].id,s[maxidx].id)>0) maxidx=l;
+	if (r<=n&&strcmp(s[r].id,s[maxidx].id)>0) maxidx=r;
+	if (maxidx!=i){
+		swap(i,maxidx);
+		heapify2(maxidx,n);
+	}
+}
+
+void buildheap2(int n){
+	for (int i=n/2;i>=1;i--) heapify2(i,n);
+}
+
+void heapsort2(int n){
+	buildheap2(n);
+	for (int i=n;i>=2;i--){
+		swap(1,i);
+		heapify2(1,i-1);
+	}
+}
+
 int main(){
 	int n;
 	scanf("%d",&n);
@@ -51,8 +77,10 @@ int main(){
 		strcpy(temp[i].id,s[i].id);
 	}
 	heapsort(n);
+	for (int i=1;i<=n;i++) s[i].pos=i-1;
+	heapsort2(n);
 	printf("\n");
-	for (int i=n;i>=1;i--)
-		printf("%s %d\n",temp[i].id,i-1);
+	for (int i=1;i<=n;i++)
+		printf("%s %d\n",s[i].id,s[i].pos);
 		
 }
