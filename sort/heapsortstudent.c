@@ -12,7 +12,8 @@ typedef struct student{
 	
 }student;
 student s[100001];
-student temp[100001];
+int n;
+
 void swap(int i,int j){
 	student temp=s[i];
 	s[i]=s[j];
@@ -31,12 +32,12 @@ void heapify(int i,int n){
 	}
 }
 
-void buildheap(int n){
+void buildheap(){
 	for (int i=n/2;i>=1;i--) heapify(i,n);
 }
 
-void heapsort(int n){
-	buildheap(n);
+void heapsort(){
+	buildheap();
 	for (int i=n;i>=2;i--){
 		swap(1,i);
 		heapify(1,i-1);
@@ -56,12 +57,12 @@ void heapify2(int i,int n){
 	}
 }
 
-void buildheap2(int n){
+void buildheap2(){
 	for (int i=n/2;i>=1;i--) heapify2(i,n);
 }
 
-void heapsort2(int n){
-	buildheap2(n);
+void heapsort2(){
+	buildheap2();
 	for (int i=n;i>=2;i--){
 		swap(1,i);
 		heapify2(1,i-1);
@@ -69,17 +70,13 @@ void heapsort2(int n){
 }
 
 int main(){
-	int n;
 	scanf("%d",&n);
 	for (int i=1;i<=n;i++) {
 		scanf("%s %d",s[i].id,&s[i].grade);
-		temp[i].grade=s[i].grade;
-		strcpy(temp[i].id,s[i].id);
 	}
 	heapsort(n);
 	for (int i=1;i<=n;i++) s[i].pos=i-1;
-	heapsort2(n);
-	printf("\n");
+	heapsort2();
 	for (int i=1;i<=n;i++)
 		printf("%s %d\n",s[i].id,s[i].pos);
 		

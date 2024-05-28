@@ -5,15 +5,14 @@
 #include <math.h>
 #include<stdbool.h>
 
-void ham3(unsigned int n,unsigned int b){
-    if (n==0||b==0) return;
+int ham4(unsigned int n){
+    if (n==0) return 0;
     else{
-        printf("%d %d\n",n,b);
-        ham3(n/b,b);
-        printf("%d",n%b);
+        printf("%d ",n);
+        return ham4(n-1)+ham4(n-1);
     }
 }
 
 int main(){
- ham3(2020,8);
+ ham4(6);
 }
