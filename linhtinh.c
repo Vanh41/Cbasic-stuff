@@ -1,18 +1,20 @@
-#include<stdio.h>
-#include<stdlib.h>
-#include<string.h>
-#include<ctype.h>
-#include <math.h>
-#include<stdbool.h>
+#include <stdio.h>
+#include <stdlib.h>
 
-int ham4(unsigned int n){
-    if (n==0) return 0;
-    else{
-        printf("%d ",n);
-        return ham4(n-1)+ham4(n-1);
+int n=4, m=23,S=0, count=0;
+
+void Try(int k, int last){
+    for(int v=last+1; v<=m; v++){
+        S+=v;
+        if(k==n){
+            if(S==m) count++;
+        }
+        else Try(k+1, v);
+        S-=v;
     }
 }
 
 int main(){
- ham4(6);
+    Try(1,0);
+    printf("%d", count);
 }
