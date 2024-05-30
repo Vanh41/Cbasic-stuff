@@ -8,22 +8,23 @@
 #define N 1000001
 
 
-// /////
-// Note: In C, the terminated command is:
+// Given an integer n, write a program to generate the last k permutations of 1, 2, ..., n in a lexicalgraphic order (elements of a permutation are separated by a SPACE character).
+// ////////
+//  Note: In C, the terminated command:
 // #include <stdlib.h>
 // void quit(){
 // 	exit(0);
 // }
-// ///////
-// Input: Two integers: n,k. (n<=10000)
-// Output: The first k permutations.
+// ////////////
+// Input: Two integers: n,k. (n<=10000, k < 1001)
+// Output: The last k permutations.
 
 // Example:
 // Input:
 // 3 2
 // Output:
-// 1 2 3 
-// 1 3 2
+// 3 1 2
+// 3 2 1
 
 
 int n;
