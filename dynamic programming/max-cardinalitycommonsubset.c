@@ -23,7 +23,7 @@ void maxcommonsubset(){
 			i++;
 			j++;
 		}
-		else if (a[i]>a[j]) j++;
+		else if (a[i]>b[j]) j++;
 		else i++;
 	}
 }
