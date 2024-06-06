@@ -5,7 +5,7 @@
 #include <math.h>
 #include <stdbool.h>
 
-// a:m x n , xuất phát từ ô nào đó cột 1, tìm tổng đường đi lớn nhất, chỉ đc đi (i,j+1),(i-1,j+1),(i+1,j);
+// a:n x m , xuất phát từ ô nào đó cột 1, tìm tổng đường đi lớn nhất, chỉ đc đi (i,j+1),(i-1,j+1),(i+1,j);
 // 5 7
 // 9 -2 6 2 1 3 4
 // 0 -1 6 7 1 3 3
