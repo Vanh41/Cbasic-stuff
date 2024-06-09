@@ -5,38 +5,31 @@
 #include <math.h>
 #include <stdbool.h>
 
-int Q;
-int n;
-unsigned long long a[100000];
-int count=0;
+struct bintree{
+    int key;
+    struct bintree *leftchild;
+    struct bintree *rightchild;
+};
+typedef struct bintree node;
 
-int cmp(const void *ptr1, const void *ptr2){
-    unsigned long long *x=(unsigned long long*)ptr1;
-    unsigned long long *y=(unsigned long long*)ptr2;
-    return *x-*y;
+node *makenode(int k){
+    node *p=(node*)malloc(sizeof(node));
+    p->key=k;
+    p->leftchild=NULL;
+    p->rightchild=NULL;
+    return p;
 }
 
-unsigned long long binsearch(int l,int r,int k){
-    if (l>r) return -1;
-    if (l==r){
-        if (a[l]==k) return l;
-        else return -1;
-    }
-    int m=(l+r)/2;
-    if (a[m]==k) return m;
-    if (a[m]<k) return binsearch(m+1,r,k);
-    else return binsearch(l,m-1,k);
+node *find(node *r,int k){
+    if (r==NULL) return NULL;
+    if (r->key==k) return r;
+    if (k>r->key) return find(r->rightchild,k);
+    else return find(r->leftchild,k);
 }
+
 
 
 
 int main(){
-    scanf("%d %d",&n,&Q);
-    for (int i=0;i<n;i++) scanf("%lld",&a[i]);
-    qsort(a,n,sizeof(unsigned long long),cmp);
-    for (int i=0;i<n-1;i++){
-        int x=binsearch(i+1,n,Q-a[i]);
-        if (x!=-1) count++;
-    }
-    printf("%d",count);
+
 }
