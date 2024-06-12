@@ -67,8 +67,8 @@ node *removeroot(node *r){
 node *removed(node *r,int k){
     if (r==NULL) return NULL;
     if (r->key==k) return removeroot(r);
-    if (r->key<k) r->rightchild=removeroot(r->rightchild);
-    else r->leftchild=removeroot(r->leftchild);
+    if (r->key<k) r->rightchild=removed(r->rightchild,k);
+    else r->leftchild=removed(r->leftchild,k);
     return r;
 }
 
