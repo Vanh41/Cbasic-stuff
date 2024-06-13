@@ -26,7 +26,7 @@ void buildheap(int a[],int n){
 	for (int i=n/2;i>=1;i--) heapify(a,i,n);
 }
 
-void heapsort(int a[],int n){
+void heapsorted(int a[],int n){
 	buildheap(a,n);
 	for (int i=n;i>=2;i--){
 		swap(&a[1],&a[i]);
@@ -39,6 +39,6 @@ int main(){
 	int arr[100000];
 	scanf("%d",&n);
 	for (int i=1;i<=n;i++) scanf("%d",&arr[i]);
-	heapsort(arr,n);
+	heapsorted(arr,n);
 	for (int i=1;i<=n;i++) printf("%d ",arr[i]);
 }
