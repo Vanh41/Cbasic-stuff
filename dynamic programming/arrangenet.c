@@ -81,6 +81,6 @@ int main(){
                 T[i]=net[j].id;
             }
     }
-    for (int i=0;i<n;i++) printf("%d ",DP[i]);
+    printf("%d",DP[n-1]);
 
 }
