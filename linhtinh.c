@@ -50,20 +50,20 @@ void insert(char f[],int money){
         while (temp->next!=NULL){
             if (strcmp(temp->from,f)==0) {
                 temp->total+=money;
-                free(p);
+                // free(p);
                 return;
             }
             temp=temp->next;
         }
         if (strcmp(temp->from,f)==0) {
             temp->total+=money;
-            free(p);
+            // free(p);
             return;
         }
         else {
             temp->next=p;
             temp->next->total=money;
-            free(p);
+            // free(p);
         }
         
    }
@@ -72,6 +72,7 @@ void insert(char f[],int money){
 int totalsac(char f[]){
     int idx=hash(f);
     node *temp=m.arr[idx];
+    // if (temp==NULL) return 0;    
     while (temp!=NULL){
         if (strcmp(f,temp->from)==0) {
             int s=temp->total;
