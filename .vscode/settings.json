@@ -61,6 +61,9 @@
     "math.h": "c",
     "string.h": "c",
     "ctype.h": "c",
-    "stdbool.h": "c"
+    "stdbool.h": "c",
+    "__bit_reference": "c",
+    "string": "c",
+    "string_view": "c"
   }
 }
