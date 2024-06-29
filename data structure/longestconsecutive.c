@@ -38,7 +38,7 @@ void uni(int x,int y){
 
 void longestconsecutive(){
     for (int i=0;i<n;i++) makeset(nums[i]);
-    for (int i=0;i<n;i++) mark[nums[i]]=i;
+    for (int i=0;i<n;i++) mark[nums[i]]=1;
     int identifier1,identifier2;
     for (int i=0;i<n;i++){
         int k=nums[i];
